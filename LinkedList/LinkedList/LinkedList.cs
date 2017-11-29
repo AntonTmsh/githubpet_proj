@@ -6,7 +6,18 @@ using System.Threading.Tasks;
 
 namespace LinkedList
 {
-    class LinkedList
+    class LinkedList<T>
     {
+        private Node<T> headNode;
+
+        public LinkedList(Node<T> element)
+        {
+            headNode = element;
+        }
+
+        void Add(Node<T> node)
+        {
+            
+        }
     }
 }
