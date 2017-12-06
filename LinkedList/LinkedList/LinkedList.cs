@@ -8,16 +8,46 @@ namespace LinkedList
 {
     class LinkedList<T>
     {
-        private Node<T> headNode;
+        public Node<T> headNode;
+        public Node<T> tailNode;
+        public int count;
 
-        public LinkedList(Node<T> element)
+        public LinkedList()
         {
-            headNode = element;
+
+        }
+        public LinkedList(Node<T> node)
+        {
+            headNode = node;
+            tailNode = headNode;
+            count++;
         }
 
-        void Add(Node<T> node)
+        public void Add(Node<T> node)
         {
-            
+            if (headNode == tailNode)
+            {
+                tailNode = node;
+                headNode.nextNode = tailNode;
+            }
+            Node<T> temp = tailNode;
+            tailNode = node;
+            temp.nextNode = tailNode;
+            count++;
+        }
+
+        public void AddEnd(Node<T> node)
+        {
+            if (count == 0)
+            {
+                headNode = node;
+            }
+            else
+            {
+                tailNode.nextNode = node;
+            }
+            tailNode = node;
+            count++;
         }
     }
 }
