@@ -10,6 +10,10 @@ namespace LinkedList
     {
         static void Main(string[] args)
         {
+            
+            
+            
+            
             //var linkList = new LinkedList<int>(new Node<int>(2));
             var linkList = new LinkedList<int>();
             linkList.AddEnd(new Node<int>(4));
@@ -17,6 +21,12 @@ namespace LinkedList
             linkList.AddEnd(new Node<int>(9));
             linkList.AddEnd(new Node<int>(1));
 
+            linkList.AddAt(new Node<int>(7), 2);
+
+            foreach (var value in linkList)
+            {
+                Console.WriteLine("Node " + value);
+            }
 
             var node = linkList.headNode;
             for (int i=0; i < linkList.count; i++)

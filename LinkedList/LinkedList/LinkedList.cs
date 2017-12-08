@@ -1,12 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LinkedList
 {
-    class LinkedList<T>
+    class LinkedList<T> : IEnumerable<T>
     {
         public Node<T> headNode;
         public Node<T> tailNode;
@@ -48,6 +46,55 @@ namespace LinkedList
             }
             tailNode = node;
             count++;
+        }
+
+        public void AddFirst(Node<T> node)
+        {
+
+            var temp = headNode;
+            headNode = node;
+            if (count == 0)
+            {
+                tailNode = headNode;
+            }
+            else
+            {
+                headNode.nextNode = temp;
+            }
+            count++;
+        }
+
+        public void AddAt(Node<T> node, int position)
+        {
+            if (position > count)
+            {
+                return;
+            }          
+            var current = headNode;
+            while (position != 1)
+            {
+                current = current.nextNode;
+                position--;
+            }
+            var temp = current.nextNode;
+            current.nextNode = node;
+            node.nextNode = temp;
+            count++;
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            var current = headNode;
+            while (current != null)
+            {
+                yield return current.value;
+                current = current.nextNode;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
         }
     }
 }
