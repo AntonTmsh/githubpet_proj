@@ -10,10 +10,11 @@ namespace LinkedList
     {
         static void Main(string[] args)
         {
-            
-            
-            
-            
+
+            int test1 = 5;
+            var test = test1.Equals(5);
+
+
             //var linkList = new LinkedList<int>(new Node<int>(2));
             var linkList = new LinkedList<int>();
             linkList.AddEnd(new Node<int>(4));
@@ -29,7 +30,7 @@ namespace LinkedList
             }
 
             var node = linkList.headNode;
-            for (int i=0; i < linkList.count; i++)
+            for (int i=0; i < linkList.Length(); i++)
             {
                 
                 Console.WriteLine("Node "+ node.value);
