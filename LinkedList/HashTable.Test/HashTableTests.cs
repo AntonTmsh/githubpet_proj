@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LinkedList.Test
+namespace HashTable.Test
 {
-    public class Class1
+    public class HashTableTests
     {
     }
 }

@@ -4,109 +4,119 @@ using System.Collections.Generic;
 
 namespace LinkedList
 {
-    class LinkedList<T> : IEnumerable<T>
+    public class LinkedList<T> : IEnumerable<T>
     {
-        public Node<T> headNode { get; private set; }
-        public Node<T> tailNode { get; private set; }
-        int count;
+        public Node<T> HeadNode { get; private set; }
+        public Node<T> TailNode { get; private set; }
+        int _count;
 
-        public LinkedList()
-        {
+        //public LinkedList()
+        //{
 
-        }
-        public LinkedList(Node<T> node)
-        {
-            headNode = node;
-            tailNode = headNode;
-            count++;
-        }
+        //}
+        //public LinkedList(Node<T> node)
+        //{
+        //    headNode = node;
+        //    tailNode = headNode;
+        //    count++;
+        //}
 
         public int Length()
         {
-            return count;
+            return _count;
         }
 
-        public void Add(Node<T> node)
-        {
-            if (headNode == tailNode)
-            {
-                tailNode = node;
-                headNode.nextNode = tailNode;
-            }
-            Node<T> temp = tailNode;
-            tailNode = node;
-            temp.nextNode = tailNode;
-            count++;
-        }
+        //public void Add(Node<T> node)
+        //{
+        //    if (headNode == tailNode)
+        //    {
+        //        tailNode = node;
+        //        headNode.nextNode = tailNode;
+        //    }
+        //    Node<T> temp = tailNode;
+        //    tailNode = node;
+        //    temp.nextNode = tailNode;
+        //    count++;
+        //}
 
         public void AddEnd(Node<T> node)
         {
-            if (count == 0)
+            if (_count == 0)
             {
-                headNode = node;
+                HeadNode = node;
             }
             else
             {
-                tailNode.nextNode = node;
+                TailNode.NextNode = node;
             }
-            tailNode = node;
-            count++;
+            TailNode = node;
+            _count++;
+        }
+
+        public void Add(T item)
+        {
+            AddFirst(new Node<T>(item));
         }
 
         public void AddFirst(Node<T> node)
         {
 
-            var temp = headNode;
-            headNode = node;
-            if (count == 0)
+            var temp = HeadNode;
+            HeadNode = node;
+            if (_count == 0)
             {
-                tailNode = headNode;
+                TailNode = HeadNode;
             }
             else
             {
-                headNode.nextNode = temp;
+                HeadNode.NextNode = temp;
             }
-            count++;
+            _count++;
+        }
+
+        public void AddAt(T item, int position)
+        {
+            AddAt(new Node<T>(item), position);
         }
 
         public void AddAt(Node<T> node, int position)
         {
-            if (position > count)
+            if (position > _count)
             {
                 return;
             }
-            var current = headNode;
+            var current = HeadNode;
             while (position != 1)
             {
-                current = current.nextNode;
+                current = current.NextNode;
                 position--;
             }
-            var temp = current.nextNode;
-            current.nextNode = node;
-            node.nextNode = temp;
-            count++;
+            var temp = current.NextNode;
+            current.NextNode = node;
+            node.NextNode = temp;
+            _count++;
         }
 
         public void Remove(T item)
         {
 
-            if (count == 0)
+            if (_count == 0)
             {
                 return;
             }
-            if (count == 1 && headNode.value.Equals(item))
+            if (_count == 1 && HeadNode.Value.Equals(item))
             {
-                headNode = null;
+                HeadNode = null;
             }
-            var currentNode = headNode;
-            for (var i = 0; i < count; i++)
+            var currentNode = HeadNode;
+            for (var i = 0; i < _count; i++)
             {
                 var temp = currentNode;
-                currentNode = currentNode.nextNode;
-                if (currentNode.value.Equals(item))
+                currentNode = currentNode.NextNode;
+                if (currentNode.Value.Equals(item))
                 {
-                    temp.nextNode = currentNode.nextNode;
-                    count--;
+                    temp.NextNode = currentNode.NextNode;
+                    _count--;
                     break;
                 }
 
@@ -122,32 +132,32 @@ namespace LinkedList
 
         public bool RemoveAt(int position)
         {
-            if (position > count)
+            if (position > _count)
             {
                 return false;
             }
 
             if (position == 1)
             {
-                if (headNode.nextNode == null)
+                if (HeadNode.NextNode == null)
                 {
-                    headNode = null;                
+                    HeadNode = null;                
                 }
                 else
                 {
-                    headNode = headNode.nextNode;
+                    HeadNode = HeadNode.NextNode;
                 }
                 return true;
             }
 
-            var current = headNode;
+            var current = HeadNode;
             while (position != 1)
             {
-                current = current.nextNode;
+                current = current.NextNode;
                 position--;
             }
-            current.nextNode = current.nextNode.nextNode;
-            count--;
+            current.NextNode = current.NextNode.NextNode;
+            _count--;
             return true;
         }
 
@@ -155,36 +165,36 @@ namespace LinkedList
         {
             if (position == 1)
             {
-                return headNode.value;
+                return HeadNode.Value;
             }
-            if (position == count)
+            if (position == _count)
             {
-                return tailNode.value;
+                return TailNode.Value;
             }
 
-            var current = headNode;
+            var current = HeadNode;
        
             while (position != 0)
             {
-                current = current.nextNode;
+                current = current.NextNode;
                 position--;
             }
-            return current.value;
+            return current.Value;
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            var current = headNode;
+            var current = HeadNode;
             while (current != null)
             {
-                yield return current.value;
-                current = current.nextNode;
+                yield return current.Value;
+                current = current.NextNode;
             }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return ((IEnumerable<T>)this).GetEnumerator();
         }
     }
 }

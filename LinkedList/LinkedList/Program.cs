@@ -29,12 +29,12 @@ namespace LinkedList
                 Console.WriteLine("Node " + value);
             }
 
-            var node = linkList.headNode;
+            var node = linkList.HeadNode;
             for (int i=0; i < linkList.Length(); i++)
             {
                 
-                Console.WriteLine("Node "+ node.value);
-                node = node.nextNode;
+                Console.WriteLine("Node "+ node.Value);
+                node = node.NextNode;
 
             }
         }
