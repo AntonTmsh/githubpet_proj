@@ -10,20 +10,14 @@ namespace LinkedList.Test
     public class LinkedListTests
     {
         [Test]
-        public void FirstTest()
+        public void test1()
         {
-            var list = new LinkedList<int>();
-            var res = list.Length();
-            Assert.That(res, Is.EqualTo(0), "");
-        }
-
-        [Test]
-        public void SecTest()
-        {
-            var list = new LinkedList<int>();
-            list.AddEnd(new Node<int>(2));
-            var res = list.Length();
-            Assert.That(res, Is.EqualTo(1), "Error");
+            LinkedList<int> list = new LinkedList<int>();
+            list.Add(1);
+            list.Add(2);
+            list.Add(3);
+            list.Add(4);
+            Assert.AreEqual(4, list.Length());
         }
 
         [Test, TestCaseSource("Add_Success_Cases")]
@@ -53,6 +47,59 @@ namespace LinkedList.Test
                 current++;
             }
         }
+
+        //[Test]
+        //public void RemoveFirstPosition_Empty_Lists()
+        //{
+        //    LinkedList<int> list = new LinkedList<int>();
+        //    Assert.AreEqual(0, list.Length());
+        //    Assert.IsNull(list.HeadNode);
+        //    Assert.IsNull(list.TailNode);
+
+        //    list.RemoveAt(0);
+        //    Assert.AreEqual(0, list.Length());
+        //    Assert.IsNull(list.HeadNode);
+        //    Assert.IsNull(list.TailNode);
+
+        //}
+
+        //[Test]
+        //public void RemoveFirst_One_Node()
+        //{
+        //    LinkedList<int> list = new LinkedList<int>();
+
+        //    list.Add(1);
+        //    list.RemoveAt(0);
+        //    Assert.AreEqual(0, list.Length());
+        //    Assert.IsNull(list.HeadNode);
+        //    Assert.IsNull(list.TailNode);
+
+        //    list.Add(2);
+        //    list.Remove(2);
+        //    Assert.AreEqual(0, list.Length());
+        //    Assert.IsNull(list.HeadNode);
+        //    Assert.IsNull(list.TailNode);
+        //}
+
+        //[Test]
+        //public void RemoveFirstLast_Two_Node()
+        //{
+        //    LinkedList<int> list = new LinkedList<int>();
+
+        //    list.AddFirst(10);
+        //    list.AddFirst(20);
+
+        //    list.RemoveFirst();
+        //    Assert.AreEqual(1, list.Count);
+        //    Assert.AreEqual(10, list.Head.Value);
+        //    Assert.AreEqual(10, list.Tail.Value);
+
+        //    list.AddFirst(10);
+        //    list.RemoveLast();
+        //    Assert.AreEqual(1, list.Count);
+        //    Assert.AreEqual(10, list.Head.Value);
+        //    Assert.AreEqual(10, list.Tail.Value);
+        //}
 
         static object[] Add_Success_Cases =
         {

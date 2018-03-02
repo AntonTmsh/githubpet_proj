@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace LinkedList
 {
-    interface ILinkedList
+    interface ILinkedList<T>
     {
         int Length();
-        void Add<T>(T item);
-        void AddAt<T>(T item, int position);
-        bool Remove<T>(T item);
+        void Add(T item);
+        void AddAt(T item, int position);
+        bool Remove(T item);
         bool RemoveAt(int position);
-        T ElementAt<T>(int position);
+        T ElementAt(int position);
     }
 }

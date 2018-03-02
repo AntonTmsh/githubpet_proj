@@ -4,40 +4,16 @@ using System.Collections.Generic;
 
 namespace LinkedList
 {
-    public class LinkedList<T> : IEnumerable<T>
+    public class LinkedList<T> : IEnumerable<T>, ILinkedList<T>
     {
         public Node<T> HeadNode { get; private set; }
         public Node<T> TailNode { get; private set; }
-        int _count;
-
-        //public LinkedList()
-        //{
-
-        //}
-        //public LinkedList(Node<T> node)
-        //{
-        //    headNode = node;
-        //    tailNode = headNode;
-        //    count++;
-        //}
+        private int _count;
 
         public int Length()
         {
             return _count;
         }
-
-        //public void Add(Node<T> node)
-        //{
-        //    if (headNode == tailNode)
-        //    {
-        //        tailNode = node;
-        //        headNode.nextNode = tailNode;
-        //    }
-        //    Node<T> temp = tailNode;
-        //    tailNode = node;
-        //    temp.nextNode = tailNode;
-        //    count++;
-        //}
 
         public void AddEnd(Node<T> node)
         {
@@ -60,7 +36,6 @@ namespace LinkedList
 
         public void AddFirst(Node<T> node)
         {
-
             var temp = HeadNode;
             HeadNode = node;
             if (_count == 0)
@@ -81,7 +56,7 @@ namespace LinkedList
 
         public void AddAt(Node<T> node, int position)
         {
-            if (position > _count)
+            if (position > _count || position < 0)
             {
                 return;
             }
@@ -97,16 +72,19 @@ namespace LinkedList
             _count++;
         }
 
-        public void Remove(T item)
+        public bool Remove(T item)
         {
 
             if (_count == 0)
             {
-                return;
+                return false;
             }
             if (_count == 1 && HeadNode.Value.Equals(item))
             {
                 HeadNode = null;
+                TailNode = null;
+                _count--;
+                return true;
             }
             var currentNode = HeadNode;
             for (var i = 0; i < _count; i++)
@@ -117,41 +95,41 @@ namespace LinkedList
                 {
                     temp.NextNode = currentNode.NextNode;
                     _count--;
-                    break;
+                    return true;
                 }
-
             }
-            //foreach (var nodeValue in this)
-            //{
-            //    if (nodeValue.Equals(item))
-            //    {
 
-            //    }
-            //}
+            return false;
         }
 
         public bool RemoveAt(int position)
         {
-            if (position > _count)
+            if (position > _count || position < 0)
+            {
+                return false;
+            }
+            if (_count == 0)
             {
                 return false;
             }
 
-            if (position == 1)
+            if (position == 0)
             {
-                if (HeadNode.NextNode == null)
+                if (TailNode.NextNode == null)
                 {
-                    HeadNode = null;                
+                    TailNode = null;
+                    HeadNode = null;
                 }
                 else
                 {
-                    HeadNode = HeadNode.NextNode;
+                    TailNode = TailNode.NextNode;
                 }
+                _count--;
                 return true;
             }
 
             var current = HeadNode;
-            while (position != 1)
+            while (position != 0)
             {
                 current = current.NextNode;
                 position--;

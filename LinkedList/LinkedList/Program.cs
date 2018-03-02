@@ -16,6 +16,12 @@ namespace LinkedList
 
 
             //var linkList = new LinkedList<int>(new Node<int>(2));
+            var linkList1 = new LinkedList<int>();
+            linkList1.Add(1);
+            linkList1.Add(2);
+            linkList1.Add(3);
+            linkList1.Add(4);
+
             var linkList = new LinkedList<int>();
             linkList.AddEnd(new Node<int>(4));
             linkList.AddEnd(new Node<int>(8));
