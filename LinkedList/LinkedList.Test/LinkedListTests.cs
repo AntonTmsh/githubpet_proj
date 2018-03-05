@@ -13,13 +13,13 @@ namespace LinkedList.Test
         public void AddAtElementAt_Success_Cases()
         {
             LinkedList<int> list = new LinkedList<int>();
-            list.AddAt(1,0);
-            list.AddAt(2,1);
-            list.AddAt(3,2);
+            list.AddAt(1, 0);
+            list.AddAt(2, 1);
+            list.AddAt(3, 2);
             Assert.AreEqual(3, list.Length());
             Assert.AreEqual(list.HeadNode.Value, 1);
             Assert.AreEqual(list.TailNode.Value, 3);
-            list.AddAt(4,2);
+            list.AddAt(4, 2);
             Assert.AreEqual(4, list.Length());
             Assert.AreEqual(list.TailNode.Value, 3);
             Assert.AreEqual(list.ElementAt(0), 1);
@@ -67,7 +67,6 @@ namespace LinkedList.Test
             Assert.AreEqual(0, list.Length());
             Assert.IsNull(list.HeadNode);
             Assert.IsNull(list.TailNode);
-
         }
 
         [Test]
@@ -130,7 +129,7 @@ namespace LinkedList.Test
             {
                 Assert.AreEqual(i, list.Length(), "Unexpected list count");
                 //Remove Last
-                list.RemoveAt(i-1);
+                list.RemoveAt(i - 1);
             }
 
             Assert.AreEqual(0, list.Length());
@@ -167,28 +166,28 @@ namespace LinkedList.Test
 
         static object[] Add_Success_Cases =
         {
-            new int[] { 0 },
-            new int[] { 0, 1 },
-            new int[] { 0, 1, 2 },
-            new int[] { 0, 1, 2, 3 },
+            new int[] {0},
+            new int[] {0, 1},
+            new int[] {0, 1, 2},
+            new int[] {0, 1, 2, 3},
         };
 
         static object[] Remove_Unsuccessful_Cases =
         {
-            new object[] { new int[] { 0 }, 10 },
-            new object[] { new int[] { 0, 1 }, 10 },
-            new object[] { new int[] { 0, 1, 2 }, 10 },
-            new object[] { new int[] { 0, 1, 2, 3 }, 10 }
+            new object[] {new int[] {0}, 10},
+            new object[] {new int[] {0, 1}, 10},
+            new object[] {new int[] {0, 1, 2}, 10},
+            new object[] {new int[] {0, 1, 2, 3}, 10}
         };
 
         static object[] Remove_Successful_Cases =
         {
-            new object[] { new int[] { 10 }, 10 },
-            new object[] { new int[] { 10, 0 }, 10 },
-            new object[] { new int[] { 0, 10 }, 10 },
-            new object[] { new int[] { 0, 0, 10 }, 10 },
-            new object[] { new int[] { 0, 10, 0 }, 10 },
-            new object[] { new int[] { 10, 0, 0}, 10 },
+            new object[] {new int[] {10}, 10},
+            new object[] {new int[] {10, 0}, 10},
+            new object[] {new int[] {0, 10}, 10},
+            new object[] {new int[] {0, 0, 10}, 10},
+            new object[] {new int[] {0, 10, 0}, 10},
+            new object[] {new int[] {10, 0, 0}, 10},
         };
     }
 }

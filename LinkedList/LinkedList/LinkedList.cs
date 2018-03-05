@@ -25,6 +25,7 @@ namespace LinkedList
             {
                 TailNode.NextNode = node;
             }
+
             TailNode = node;
             _count++;
         }
@@ -46,6 +47,7 @@ namespace LinkedList
             {
                 HeadNode.NextNode = temp;
             }
+
             _count++;
         }
 
@@ -60,6 +62,7 @@ namespace LinkedList
             {
                 return;
             }
+
             if (position == 0)
             {
                 AddFirst(node);
@@ -75,7 +78,6 @@ namespace LinkedList
             }
 
             var current = HeadNode;
-            //Node<T> previous = null;
 
             while (position != 1)
             {
@@ -87,25 +89,10 @@ namespace LinkedList
             current.NextNode = node;
             node.NextNode = temp;
             _count++;
-            //if (position > _count || position < 0)
-            //{
-            //    return;
-            //}
-            //var current = HeadNode;
-            //while (position != 1)
-            //{
-            //    current = current.NextNode;
-            //    position--;
-            //}
-            //var temp = current.NextNode;
-            //current.NextNode = node;
-            //node.NextNode = temp;
-            //_count++;
         }
 
         public bool Remove(T item)
         {
-
             Node<T> previous = null;
             Node<T> current = HeadNode;
 
@@ -156,10 +143,11 @@ namespace LinkedList
                 {
                     HeadNode = HeadNode.NextNode;
                 }
+
                 _count--;
                 return true;
             }
-             
+
             var current = HeadNode;
             while (position != 1)
             {
@@ -176,6 +164,7 @@ namespace LinkedList
                 TailNode = current;
                 TailNode.NextNode = null;
             }
+
             _count--;
             return true;
         }
@@ -186,18 +175,20 @@ namespace LinkedList
             {
                 return HeadNode.Value;
             }
-            if (position+1 == _count)
+
+            if (position + 1 == _count)
             {
                 return TailNode.Value;
             }
 
             var current = HeadNode;
-       
+
             while (position != 0)
             {
                 current = current.NextNode;
                 position--;
             }
+
             return current.Value;
         }
 
@@ -213,7 +204,7 @@ namespace LinkedList
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return ((IEnumerable<T>)this).GetEnumerator();
+            return ((IEnumerable<T>) this).GetEnumerator();
         }
     }
 }
