@@ -60,43 +60,79 @@ namespace LinkedList
             {
                 return;
             }
+            if (position == 0)
+            {
+                AddFirst(node);
+                return;
+            }
+
+            if (position == _count)
+            {
+                TailNode.NextNode = node;
+                TailNode = TailNode.NextNode;
+                _count++;
+                return;
+            }
+
             var current = HeadNode;
+            //Node<T> previous = null;
+
             while (position != 1)
             {
                 current = current.NextNode;
                 position--;
             }
+
             var temp = current.NextNode;
             current.NextNode = node;
             node.NextNode = temp;
             _count++;
+            //if (position > _count || position < 0)
+            //{
+            //    return;
+            //}
+            //var current = HeadNode;
+            //while (position != 1)
+            //{
+            //    current = current.NextNode;
+            //    position--;
+            //}
+            //var temp = current.NextNode;
+            //current.NextNode = node;
+            //node.NextNode = temp;
+            //_count++;
         }
 
         public bool Remove(T item)
         {
 
-            if (_count == 0)
+            Node<T> previous = null;
+            Node<T> current = HeadNode;
+
+            while (current != null)
             {
-                return false;
-            }
-            if (_count == 1 && HeadNode.Value.Equals(item))
-            {
-                HeadNode = null;
-                TailNode = null;
-                _count--;
-                return true;
-            }
-            var currentNode = HeadNode;
-            for (var i = 0; i < _count; i++)
-            {
-                var temp = currentNode;
-                currentNode = currentNode.NextNode;
-                if (currentNode.Value.Equals(item))
+                if (current.Value.Equals(item))
                 {
-                    temp.NextNode = currentNode.NextNode;
-                    _count--;
+                    if (previous != null)
+                    {
+                        previous.NextNode = current.NextNode;
+                        if (current.NextNode == null)
+                        {
+                            TailNode = previous;
+                        }
+
+                        _count--;
+                    }
+                    else
+                    {
+                        RemoveAt(0);
+                    }
+
                     return true;
                 }
+
+                previous = current;
+                current = current.NextNode;
             }
 
             return false;
@@ -104,48 +140,53 @@ namespace LinkedList
 
         public bool RemoveAt(int position)
         {
-            if (position > _count || position < 0)
-            {
-                return false;
-            }
-            if (_count == 0)
+            if (position > _count || position < 0 || _count < 1)
             {
                 return false;
             }
 
             if (position == 0)
             {
-                if (TailNode.NextNode == null)
+                if (HeadNode.NextNode == null)
                 {
                     TailNode = null;
                     HeadNode = null;
                 }
                 else
                 {
-                    TailNode = TailNode.NextNode;
+                    HeadNode = HeadNode.NextNode;
                 }
                 _count--;
                 return true;
             }
-
+             
             var current = HeadNode;
-            while (position != 0)
+            while (position != 1)
             {
                 current = current.NextNode;
                 position--;
             }
-            current.NextNode = current.NextNode.NextNode;
+
+            if (current.NextNode != TailNode)
+            {
+                current.NextNode = current.NextNode.NextNode;
+            }
+            else
+            {
+                TailNode = current;
+                TailNode.NextNode = null;
+            }
             _count--;
             return true;
         }
 
         public T ElementAt(int position)
         {
-            if (position == 1)
+            if (position == 0)
             {
                 return HeadNode.Value;
             }
-            if (position == _count)
+            if (position+1 == _count)
             {
                 return TailNode.Value;
             }
