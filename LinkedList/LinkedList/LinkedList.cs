@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace LinkedList
 {
+    //comment
     public class LinkedList<T> : IEnumerable<T>, ILinkedList<T>
     {
         public Node<T> HeadNode { get; private set; }

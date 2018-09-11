@@ -6,6 +6,7 @@ using NUnit.Framework;
 
 namespace LinkedList.Test
 {
+    //comment
     [TestFixture]
     public class LinkedListTests
     {
