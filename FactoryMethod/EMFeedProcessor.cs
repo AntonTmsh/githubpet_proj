@@ -7,26 +7,34 @@ namespace Epam.NetMentoring.FactoryMethod
     {
         public FeedItem Match(FeedItem feeditem)
         {
-            if (AccountDB.Accounts.ContainsKey(feeditem.SourceAccountId))
-                return feeditem;
-            return new EmFeed();
+            Account.GetAccount(feeditem.SourceAccountId);
+            return feeditem;
         }
 
         public void Save(FeedItem matchedaccount)
         {
-            throw new System.NotImplementedException();
+            Console.WriteLine($"EMFeed {matchedaccount.SourceAccountId} successfully saved");
         }
 
         public void SaveErrors(IEnumerable<ValidationError> validationError)
         {
-            throw new System.NotImplementedException();
+            foreach(ValidationError error in validationError)
+            {
+                Console.WriteLine($"Feed Item id {error.FeedId} has a following error {error.ErrorMessage}");
+            }            
         }
 
         public IEnumerable<ValidationError> Validate(FeedItem feeditem)
         {
-            if (feeditem.SourceAccountId == 0)
-                throw new ValidationError();
-            return null;
+            if (feeditem.GetType() != typeof(EmFeed))
+                throw new Exception("Incorrect type detected");
+            if (feeditem.SourceAccountId == default(int))
+                ValidationError.AddValidationError(new ValidationError(((EmFeed)feeditem).FeedItemId,"SourceAccountId is empty!"));
+            if (((EmFeed)feeditem).Sedol == default(string))
+                ValidationError.AddValidationError(new ValidationError(((EmFeed)feeditem).FeedItemId, "Sedol is empty!"));
+            if (((EmFeed)feeditem).AssetValue == default(int))
+                ValidationError.AddValidationError(new ValidationError(((EmFeed)feeditem).FeedItemId, "AssetValue is empty!"));
+            return ValidationError.GetValidationError();
         }
     }
 }

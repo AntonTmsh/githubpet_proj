@@ -2,9 +2,6 @@
 {
     internal class DeltaOneFeedManager : FeedManager
     {
-        public override IFeedProcessor GetFeedProcessor()
-        {
-            return new DeltaFeedProcessor();
-        }
+        public override IFeedProcessor FeedProcessor { get => new DeltaOneFeedProcessor(); }
     }
 }

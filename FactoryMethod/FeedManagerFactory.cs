@@ -18,7 +18,7 @@ namespace Epam.NetMentoring.FactoryMethod
             {
                 return new EMFeedManager();
             }
-            return null;
+            throw new Exception("Unsupported feed type");
         }
     }
 }
